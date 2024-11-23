@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 function SubmittedTickets() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const response = useSelector((state) => state.HomeStore.userAllTickets);
 
   useEffect(() => {
-    dispatch(getUserAllTickets({ userID: "jake@gmail.com" }));
+    dispatch(getUserAllTickets({}));
   }, [dispatch]);
 
   const handleCardClick = (ticket) => {
@@ -24,12 +25,12 @@ function SubmittedTickets() {
       <div>
         <p
           className=" text-4xl font-medium"
-          style={{ marginTop: "2%", marginLeft: "2%" }}
+          style={{ marginTop: "2%", marginLeft: "8%" }}
         >
-          Welcome Jake
+          Welcome
         </p>
 
-        <p style={{ margin: "2%" }}>
+        <p style={{ marginTop: "2%", marginLeft: "8%", marginBottom: "1%" }}>
           Tickets created by you are available below
         </p>
 
@@ -38,7 +39,7 @@ function SubmittedTickets() {
         <div className=" flex flex-col" style={{ marginLeft: "8%" }}>
           {/**Title */}
           <div
-            className=" flex flex-row justify-between  items-center bg-gray-900 "
+            className=" flex flex-row justify-between  items-center bg-blue-900 "
             style={{ width: "92%", padding: "0.8%" }}
           >
             <p className="w-1/6 text-center text-xl font-medium text-gray-200">
@@ -52,43 +53,51 @@ function SubmittedTickets() {
               Ticket Content
             </p>
           </div>
+          {response && response["result"]?.length === 0 ? (
+            <div>No submitted tickets</div>
+          ) : (
+            <></>
+          )}
           {response && response["result"]?.length > 0 ? (
             response["result"].map((ticket, index) => (
-              <Card
-                key={index}
-                variant="outlined"
-                style={{ marginBottom: "10px", padding: "10px" }}
-                onClick={() => handleCardClick(ticket)}
-              >
-                {/**Row Entries */}
-                <div
-                  className=" flex flex-row justify-between border-2  items-center shadow-md"
-                  style={{ width: "92%" }}
+              <div>
+                {" "}
+                <Card
+                  key={index}
+                  variant="outlined"
+                  onClick={() => handleCardClick(ticket)}
                 >
-                  <p
-                    className="w-1/6 text-center text-md font-medium border-2  text-gray-700 hover:bg-zinc-100 transition transform ease-in-out hover:cursor-pointer"
-                    style={{ padding: "0.8%" }}
+                  {/**Row Entries */}
+                  <div
+                    className=" flex flex-row justify-between   items-center shadow-md"
+                    style={{ width: "92%" }}
                   >
-                    {ticket.ticket_id}
-                  </p>
-                  <p
-                    className="w-1/6 text-center text-md font-medium border-2  text-gray-700 hover:bg-zinc-100 transition transform ease-in-out hover:cursor-pointer"
-                    style={{ padding: "0.8%" }}
-                  >
-                    {ticket.created_at}
-                  </p>
-                  <p
-                    className="w-4/6 text-center text-md font-medium border-2  text-gray-700 hover:bg-zinc-100 transition transform ease-in-out hover:cursor-pointer"
-                    style={{ padding: "0.8%" }}
-                  >
-                    {ticket.message}
-                  </p>
-                </div>
-              </Card>
+                    <p
+                      className="w-1/6 text-center text-md font-medium border-2  text-gray-700 hover:bg-zinc-100 transition transform ease-in-out hover:cursor-pointer"
+                      style={{ padding: "0.8%" }}
+                    >
+                      {ticket.ticket_id}
+                    </p>
+                    <p
+                      className="w-1/6 text-center text-md font-medium border-2  text-gray-700 hover:bg-zinc-100 transition transform ease-in-out hover:cursor-pointer"
+                      style={{ padding: "0.8%" }}
+                    >
+                      {ticket.created_at}
+                    </p>
+                    <p
+                      className="w-4/6 text-center text-md font-medium border-2  text-gray-700 hover:bg-zinc-100 transition transform ease-in-out hover:cursor-pointer"
+                      style={{ padding: "0.8%" }}
+                    >
+                      {ticket.message}
+                    </p>
+                  </div>
+                </Card>
+              </div>
             ))
           ) : (
-            <p>Loading tickets...</p> // Display a loading message if data isn't available
-          )}{" "}
+            <></>
+          )}
+          {!response && <p>Loading tickets...</p>}
         </div>
       </div>
     </div>

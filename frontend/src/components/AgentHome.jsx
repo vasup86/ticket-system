@@ -24,12 +24,12 @@ function AgentHome() {
       <div>
         <p
           className=" text-4xl font-medium"
-          style={{ marginTop: "2%", marginLeft: "2%" }}
+          style={{ marginTop: "2%", marginLeft: "8%" }}
         >
           Welcome Admin 3
         </p>
 
-        <p style={{ margin: "2%" }}>
+        <p style={{ marginTop: "1%", marginBottom: "1%", marginLeft: "8%" }}>
           Tickets assigned to you are available below
         </p>
 
@@ -38,7 +38,7 @@ function AgentHome() {
         <div className=" flex flex-col" style={{ marginLeft: "8%" }}>
           {/**Title */}
           <div
-            className=" flex flex-row justify-between  items-center bg-gray-900 "
+            className=" flex flex-row justify-between  items-center bg-blue-900 "
             style={{ width: "92%", padding: "0.8%" }}
           >
             <p className="w-1/6 text-center text-xl font-medium text-gray-200">
@@ -52,17 +52,21 @@ function AgentHome() {
               Ticket Content
             </p>
           </div>
+          {response && response["result"]?.length === 0 ? (
+            <div>No assigned tickets</div>
+          ) : (
+            <></>
+          )}
           {response && response["result"]?.length > 0 ? (
             response["result"].map((ticket, index) => (
               <Card
                 key={index}
                 variant="outlined"
-                style={{ marginBottom: "10px", padding: "10px" }}
                 onClick={() => handleCardClick(ticket)}
               >
                 {/**Row Entries */}
                 <div
-                  className=" flex flex-row justify-between border-2  items-center shadow-md"
+                  className=" flex flex-row justify-between  items-center shadow-md"
                   style={{ width: "92%" }}
                 >
                   <p
@@ -87,8 +91,9 @@ function AgentHome() {
               </Card>
             ))
           ) : (
-            <p>Loading tickets...</p> // Display a loading message if data isn't available
+            <></>
           )}
+          {!response && <p>Loading tickets...</p>}
         </div>
       </div>
     </div>

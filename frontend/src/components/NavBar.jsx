@@ -4,7 +4,7 @@ function NavBar() {
   return (
     <div className=" w-full">
       <nav
-        className="bg-gray-900 flex flex-row w-full"
+        className="bg-blue-700 flex flex-row w-full items-center"
         style={{ padding: "0.4%" }}
       >
         <div className="w-1/12" style={{ marginLeft: "3%" }}>
@@ -16,7 +16,7 @@ function NavBar() {
         </div>
 
         <div className=" flex flex-row justify-around space-x-4 items-center w-1/4">
-          <div className=" bg-gray-900  text-sm  text-gray-300  hover:text-white font-medium">
+          <div className=" text-sm  text-gray-300  hover:text-white font-medium">
             <a href="">Home</a>
           </div>
           <div className=" text-sm font-medium text-gray-300  hover:text-white">
@@ -35,7 +35,7 @@ function NavBar() {
           style={{ marginLeft: "35%" }}
         >
           <button
-            className=" text-white font-semibold rounded-md border-2 bg-gray-700 hover:bg-gray-600"
+            className=" text-white font-semibold rounded-md border-2 bg-black hover:bg-blue-900"
             style={{
               paddingTop: "0.5%",
               paddingBottom: "0.5%",
@@ -47,7 +47,7 @@ function NavBar() {
           </button>
 
           <button
-            className=" text-white font-semibold rounded-md border-2 hover:bg-gray-800"
+            className=" text-white font-semibold rounded-md border-2 hover:bg-blue-800"
             style={{
               paddingTop: "0.5%",
               paddingBottom: "0.5%",

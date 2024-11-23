@@ -33,10 +33,10 @@ export default function AgentTicketDetail() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ticketID: ticket_id }), //send our user data as POST
+          body: JSON.stringify({ ticketID: ticket_id }),
         }
       )
-        .then((res) => res.json()) //get scraped data as GET
+        .then((res) => res.json())
         .then((data) => {
           setMessages(data["result"]);
         });
@@ -60,24 +60,32 @@ export default function AgentTicketDetail() {
 
   return (
     <div className="chat-container">
-      <h1>Agent</h1>
+      <div className="bg-blue-700 flex flex-row justify-between items-center">
+        <h1
+          className=" text-4xl font-bold  text-gray-200"
+          style={{ paddingLeft: "4%", paddingTop: "1%", paddingBottom: "2%" }}
+        >
+          Ticket #{ticket_id}
+        </h1>
+        <h2 className=" text-lg text-gray-300" style={{ marginRight: "3%" }}>
+          Live Chat
+        </h2>
+      </div>
       <div className="chat-messages">
         {messages?.map((msg, index) => (
           <div key={index} className={msg.creator === "agent" ? "you" : "them"}>
-            <p>
-              {/* <strong>{msg.creator === "agent" ? "You" : "Them"}:</strong>{" "} */}
-              {msg.message}
-            </p>
+            <p>{msg.message}</p>
           </div>
         ))}
       </div>
-      <div className="chat-input">
+      <div className="chat-input justify-end flex w-full">
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type your message in here..."
         />
-        <button onClick={sendMessage}>Send</button>
+        <Button onClick={sendMessage}>SEND</Button>
       </div>
     </div>
   );
